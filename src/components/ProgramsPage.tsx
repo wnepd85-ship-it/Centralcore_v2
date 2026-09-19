@@ -14,17 +14,15 @@ import { Program, GalleryItem } from '../types';
 
 interface ProgramsPageProps {
   programs: Program[];
-  galleryItems: GalleryItem[];
-  onSelectProgram: (prog: Program) => void;
-  onOpenEquipmentDetail: (item: GalleryItem) => void;
+  galleryItems?: GalleryItem[];
+  onSelectProgram?: (prog: Program) => void;
+  onOpenEquipmentDetail?: (item: GalleryItem) => void;
   onNavigateToBooking: (programId?: string) => void;
   onOpenAssessment?: () => void;
 }
 
 export const ProgramsPage: React.FC<ProgramsPageProps> = ({
   programs,
-  galleryItems,
-  onOpenEquipmentDetail,
   onNavigateToBooking
 }) => {
   const [selectedLevelFilter, setSelectedLevelFilter] = useState<string>('all');
@@ -181,53 +179,6 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Equipment Showcase (Linked Gallery) */}
-          <div className="mt-20 pt-16 border-t border-brand-surface-highest/30">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="text-xs uppercase font-bold tracking-widest text-brand-secondary block mb-2">
-                BALANCED BODY APPARATUS
-              </span>
-              <h3 className="font-serif text-2xl sm:text-3xl text-brand-primary">
-                수업에 사용되는 최고급 정품 기구
-              </h3>
-              <p className="text-xs sm:text-sm text-brand-on-surface-variant mt-2 font-light">
-                클릭하시면 각 기구의 특징과 신체 교정 효과를 상세히 확인하실 수 있습니다.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {galleryItems.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => onOpenEquipmentDetail(item)}
-                  className="bg-white border border-[#E8E4DC] rounded-2xl overflow-hidden cursor-pointer hover:shadow-md transition-all group"
-                >
-                  <div className="aspect-[4/3] overflow-hidden relative">
-                    <img 
-                      src={item.image} 
-                      alt={item.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                    <span className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-xs text-[#34270f] text-[11px] font-bold px-2.5 py-1 rounded-md">
-                      {item.title}
-                    </span>
-                  </div>
-                  <div className="p-4">
-                    <p className="text-xs text-brand-on-surface-variant line-clamp-2 leading-relaxed">
-                      {item.description}
-                    </p>
-                    <div className="mt-3 text-[11px] font-semibold text-brand-secondary flex items-center gap-1 group-hover:text-brand-primary transition-colors">
-                      <span>상세 스펙 보기</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Bottom Counseling CTA Banner */}
